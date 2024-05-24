@@ -13,7 +13,7 @@ namespace SparseVsDenseHashSet
 #endif
         public static void GenerateClasses()
         {
-            const int count = 50000;
+            const int count = 10;
             ClassGenerator.GenerateClasses(count);
         }
 
