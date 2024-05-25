@@ -742,7 +742,8 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Standalone: ZEN_INTERNAL_PROFILING
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
