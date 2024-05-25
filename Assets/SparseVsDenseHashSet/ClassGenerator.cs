@@ -78,6 +78,7 @@ namespace SparseVsDenseHashSet
             for (var injectIndex = 0; injectIndex < injectClassCount; injectIndex++)
             {
                 var testInjectBuilder = new StringBuilder();
+                testInjectBuilder.AppendLine($"using Zenject;");
                 testInjectBuilder.AppendLine($"public class TestInject{injectIndex}");
                 testInjectBuilder.AppendLine("{");
 
@@ -89,6 +90,7 @@ namespace SparseVsDenseHashSet
                     testInjectBuilder.AppendLine($"    private TestClass{i} _testClass{i};");
                 }
 
+                testInjectBuilder.Append($"    [Inject]\n");
                 testInjectBuilder.Append($"    public TestInject{injectIndex}(");
                 for (var i = start; i < end; i++)
                 {

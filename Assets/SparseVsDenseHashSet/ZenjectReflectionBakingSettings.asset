@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isEnabledInBuilds: 1
   _isEnabledInEditor: 0
-  _allGeneratedAssemblies: 1
-  _includeAssemblies: []
+  _allGeneratedAssemblies: 0
+  _includeAssemblies:
+  - Library/ScriptAssemblies/SparseVsDenseHashSet.dll
   _excludeAssemblies: []
   _namespacePatterns: []
