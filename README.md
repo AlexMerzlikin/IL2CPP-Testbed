@@ -1,11 +1,7 @@
 # Struct as a key in a dictionary
 
-With IEquatable:
-
-No allocations on access
-
-No IEquatable:
-
-Mono: 60B
-
-IL2CPP: 20B
+### Access
+| Scenario       | Mono | IL2CPP |
+|----------------|------|--------|
+| With IEquatable| 0B   | 0B     |
+| No IEquatable  | 60B  | 20B    |
