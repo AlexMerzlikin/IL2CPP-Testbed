@@ -26,7 +26,7 @@ namespace SparseVsDenseHashSet
         private static string GenerateClass(int index)
         {
             var fieldType = BaseTypes[Random.Next(BaseTypes.Length)];
-            var className = $"TestClass{index}";
+            var className = $"TestClassVContainer{index}";
             var classBuilder = new StringBuilder();
 
             classBuilder.AppendLine($"public class {className}");
@@ -78,8 +78,7 @@ namespace SparseVsDenseHashSet
             for (var injectIndex = 0; injectIndex < injectClassCount; injectIndex++)
             {
                 var testInjectBuilder = new StringBuilder();
-                testInjectBuilder.AppendLine($"using VContainer;");
-                testInjectBuilder.AppendLine($"public class TestInject{injectIndex}");
+                testInjectBuilder.AppendLine($"public class TestInjectVContainer{injectIndex}");
                 testInjectBuilder.AppendLine("{");
 
                 var start = injectIndex * classesPerInject;
@@ -87,14 +86,13 @@ namespace SparseVsDenseHashSet
 
                 for (var i = start; i < end; i++)
                 {
-                    testInjectBuilder.AppendLine($"    private TestClass{i} _testClass{i};");
+                    testInjectBuilder.AppendLine($"    private TestClassVContainer{i} _testClassVContainer{i};");
                 }
 
-                testInjectBuilder.Append($"    [Inject]\n");
-                testInjectBuilder.Append($"    public TestInject{injectIndex}(");
+                testInjectBuilder.Append($"    public TestInjectVContainer{injectIndex}(");
                 for (var i = start; i < end; i++)
                 {
-                    testInjectBuilder.Append($"TestClass{i} testClass{i}");
+                    testInjectBuilder.Append($"TestClassVContainer{i} testClassVContainer{i}");
                     if (i < end - 1)
                     {
                         testInjectBuilder.Append(", ");
@@ -106,13 +104,13 @@ namespace SparseVsDenseHashSet
                 testInjectBuilder.AppendLine("    {");
                 for (var i = start; i < end; i++)
                 {
-                    testInjectBuilder.AppendLine($"        _testClass{i} = testClass{i};");
+                    testInjectBuilder.AppendLine($"        _testClassVContainer{i} = testClassVContainer{i};");
                 }
 
                 testInjectBuilder.AppendLine("    }");
                 testInjectBuilder.AppendLine("}");
 
-                var testInjectFileName = $"TestInject{injectIndex}.cs";
+                var testInjectFileName = $"TestInjectVContainer{injectIndex}.cs";
                 File.WriteAllText(Path.Combine(directory, testInjectFileName), testInjectBuilder.ToString());
             }
         }
@@ -128,8 +126,9 @@ namespace SparseVsDenseHashSet
         {
             installerBuilder.AppendLine("using VContainer;");
             installerBuilder.AppendLine("using VContainer.Unity;");
+            installerBuilder.AppendLine("using VContainer.Unity;");
             installerBuilder.AppendLine();
-            installerBuilder.AppendLine("public class TestInstaller : LifetimeScope");
+            installerBuilder.AppendLine("public class TestInstallerVContainer : LifetimeScope");
             installerBuilder.AppendLine("{");
             installerBuilder.AppendLine("    protected override void Configure(IContainerBuilder builder)");
             installerBuilder.AppendLine("    {");
@@ -139,7 +138,7 @@ namespace SparseVsDenseHashSet
                 var classContent = GenerateClass(i);
                 fileBuilder.Append(classContent);
 
-                installerBuilder.AppendLine($"        builder.Register<TestClass{i}>(Lifetime.Singleton);");
+                installerBuilder.AppendLine($"        builder.Register<TestClassVContainer{i}>(Lifetime.Singleton);");
 
                 if (fileBuilder.Length >= 100000)
                 {
@@ -161,13 +160,13 @@ namespace SparseVsDenseHashSet
 
             for (var injectIndex = 0; injectIndex < injectClassCount; injectIndex++)
             {
-                installerBuilder.AppendLine($"        builder.Register<TestInject{injectIndex}>(Lifetime.Singleton);");
+                installerBuilder.AppendLine($"        builder.Register<TestInjectVContainer{injectIndex}>(Lifetime.Singleton);");
             }
 
             installerBuilder.AppendLine("    }");
             installerBuilder.AppendLine("}");
 
-            File.WriteAllText(Path.Combine(directory, "TestInstaller.cs"), installerBuilder.ToString());
+            File.WriteAllText(Path.Combine(directory, "TestInstallerVContainer.cs"), installerBuilder.ToString());
         }
     }
 }

@@ -2,7 +2,8 @@
     "name": "SparseVsDenseHashSet",
     "rootNamespace": "",
     "references": [
-        "Zenject"
+        "Zenject",
+        "VContainer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
