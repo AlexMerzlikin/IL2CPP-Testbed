@@ -44,3 +44,10 @@ Details: https://gamedev.center/instantly-boost-unity-game-performance-with-il2c
 | 1741.95         |
 | 1751.57         |
 | 1752.00         |
+
+## How To
+1. Open the "SampleScene"
+2. Click "Tools/Generate" to generate test classes, including TestInstaller.cs
+3. Select "TestInstaller" game object in the opened scene
+4. Add TestInstaller.cs as a component
+5. (Optional) Modify the count value in the SparseVsDenseHashSet.ClassGenerator.GenerateClasses() method to set the number of classes to generate.
